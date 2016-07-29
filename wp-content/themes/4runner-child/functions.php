@@ -21,9 +21,9 @@ function child_theme_setup() {
 }
 
 
-/*   Enlarge images with jQuery   */
+/*   Enqueue My Custom Scripts   */
 function mytheme_scripts() {
-    wp_enqueue_script( 'enlarge-images', get_stylesheet_directory_uri() . '/js/enlarge-images.js', array('jquery'), '1.12.4', true );
+
 }
 add_action( 'wp_enqueue_scripts', 'mytheme_scripts' );
 
