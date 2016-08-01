@@ -22,14 +22,21 @@ function child_theme_setup() {
 
 
 /*   Enqueue My Custom Scripts   */
+add_action( 'wp_enqueue_scripts', 'mytheme_scripts' );
 function mytheme_scripts() {
 
 }
-add_action( 'wp_enqueue_scripts', 'mytheme_scripts' );
 
 
-
-
+/*   Remove Comments   */
+function filter_media_comment_status( $open, $post_id ) {
+	$post = get_post( $post_id );
+	if( $post->post_type == 'attachment' ) {
+		return false;
+	}
+	return $open;
+}
+add_filter( 'comments_open', 'filter_media_comment_status', 10 , 2 );
 
 
 /*
@@ -42,9 +49,9 @@ add_action( 'wp_enqueue_scripts', 'mytheme_scripts' );
 ------------------------------------------------------------------------
 */
 
-function remove_footer_admin () {
-    echo 'Fueled by <a href="http://www.wordpress.org" target="_blank">WordPress</a> | WordPress Tutorials: <a href="http://www.wpbeginner.com" target="_blank">WPBeginner</a></p>';
-} 
+// function remove_footer_admin () {
+//     echo 'Fueled by <a href="http://www.wordpress.org" target="_blank">WordPress</a> | WordPress Tutorials: <a href="http://www.wpbeginner.com" target="_blank">WPBeginner</a></p>';
+// } 
 
 add_filter('admin_footer_text', 'remove_footer_admin');
 
